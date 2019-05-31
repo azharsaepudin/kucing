@@ -2,6 +2,7 @@ package com.studio.azhar.pakanotomatis;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -14,7 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -24,6 +26,7 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 
 import static com.studio.azhar.pakanotomatis.App.CHANNEL_1_ID;
 
@@ -32,14 +35,18 @@ public class MainActivity extends AppCompatActivity {
     MqttHelper mqttHelper;
     private NotificationManagerCompat notificationManager;
 
-    private EditText textMessage;
-    private Button btnPublish;
+
+    private Button btnPublish,btnPicker1, btnPicker2, btnPicker3;
 
     MediaPlayer mMediaPlayer;
 
     private MqttAndroidClient client;
     private String TAG = "MainActivity";
     private PahoMqttClient pahoMqttClient;
+
+    public TimePickerDialog timePickerDialog;
+    public TextView tvTimeResult,tvTimeResult1, tvTimeResult2, tvTimeResult3 ;
+
 
 
     @Override
@@ -51,10 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
         pahoMqttClient = new PahoMqttClient();
 
-        textMessage = findViewById(R.id.textMessage);
-       btnPublish = findViewById(R.id.publishMessage);
+        btnPublish = findViewById(R.id.btnPublish);
+        btnPicker1 = findViewById(R.id.btnPicker1);
+        btnPicker2 = findViewById(R.id.btnPicker2);
+        btnPicker3 = findViewById(R.id.btnPicker3);
 
 
+        tvTimeResult1 = findViewById(R.id.tvTimeResult1);
+        tvTimeResult2 = findViewById(R.id.tvTimeResult2);
+        tvTimeResult3 = findViewById(R.id.tvTimeResult3);
 
        client = pahoMqttClient.getMqttClient(getApplicationContext(), Constants.MQTT_BROKER_URL, Constants.CLIENT_ID);
 
@@ -63,6 +75,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 publishMQTT();
+            }
+        });
+
+
+       btnPicker1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               showTimeDialog1();
+           }
+       });
+
+        btnPicker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimeDialog2();
+            }
+        });
+
+        btnPicker3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimeDialog3();
             }
         });
 
@@ -136,16 +170,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void publishMQTT() {
-        String msg = textMessage.getText().toString().trim();
 
-        if (!msg.isEmpty()) {
+        String settingTime1 = tvTimeResult1.getText().toString().trim();
+        String settingTime2 = tvTimeResult2.getText().toString().trim();
+        String settingTime3 = tvTimeResult3.getText().toString().trim();
+
+        String mSetTime1 = ("1."+settingTime1+":"+"00");
+        String mSetTime2 = ("2."+settingTime2+":"+"00");
+        String mSetTime3 = ("3."+settingTime3+":"+"00");
+
+       // Log.d("SETIME", mSetTime);
+
+        if ((!mSetTime1.isEmpty()) ||(!mSetTime2.isEmpty()) || (!mSetTime3.isEmpty())) {
             try {
-                pahoMqttClient.publishMessage(client, msg, 0, Constants.PUBLISH_TOPIC);
+                //ganti topic khusus untuk publish setting
+                pahoMqttClient.publishMessage(client, mSetTime1, 0, Constants.PUBLISH_TOPIC);
+                pahoMqttClient.publishMessage(client, mSetTime2, 0, Constants.PUBLISH_TOPIC);
+                pahoMqttClient.publishMessage(client, mSetTime3, 0, Constants.PUBLISH_TOPIC);
             } catch (MqttException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void showTimeDialog1(){
+       Calendar calendar = Calendar.getInstance();
+
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+
+                tvTimeResult1.setText(hourOfDay+":"+minutes);
+
+            }
+        },
+                calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true
+        );
+        timePickerDialog.show();
+    }
+
+    public void showTimeDialog2(){
+        Calendar calendar = Calendar.getInstance();
+
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+
+                tvTimeResult2.setText(hourOfDay+":"+minutes);
+
+            }
+        },
+                calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true
+        );
+        timePickerDialog.show();
+    }
+
+    public void showTimeDialog3() {
+        Calendar calendar = Calendar.getInstance();
+
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
+
+                tvTimeResult3.setText(hourOfDay + ":" + minutes);
+
+            }
+        },
+                calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
+        );
+        timePickerDialog.show();
     }
 }

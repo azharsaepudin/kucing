@@ -6,82 +6,156 @@
     android:layout_height="match_parent"
     tools:context="com.studio.azhar.pakanotomatis.MainActivity">
 
-    <EditText
-        android:id="@+id/textMessage"
-        android:layout_width="180dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Enter message"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Setting Time 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeResult1" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Setting Time 3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeResult2" />
 
     <Button
-        android:id="@+id/publishMessage"
-        android:layout_width="124dp"
+        android:id="@+id/btnPublish"
+        android:layout_width="172dp"
         android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="11dp"
-        android:text="Publish"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintLeft_toRightOf="@+id/textMessage"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="set all setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPicker3" />
+
+    <Button
+        android:id="@+id/btnPicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="SET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/btnPicker2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="SET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/btnPicker3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="SET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Setting Time"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    EditText
-        android:id="@+id/subscribeTopic"
-        android:layout_width="178dp"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Subscribe topic"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMessage" />
-
-    Button
-        android:id="@+id/subscribe"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"
-        android:text="Subscribe"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Setting Time 1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/publishMessage"
-        app:layout_constraintRight_toRightOf="@+id/publishMessage"
-        app:layout_constraintTop_toBottomOf="@+id/publishMessage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    EditText
-        android:id="@+id/unSubscribeTopic"
-        android:layout_width="180dp"
+    <TextView
+        android:id="@+id/tvTimeResult1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Unsubscribe topic"
-        android:inputType="textPersonName"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintLeft_toLeftOf="@+id/subscribeTopic"
-        app:layout_constraintRight_toRightOf="@+id/subscribeTopic"
-        app:layout_constraintTop_toBottomOf="@+id/subscribeTopic" />
-
-    Button
-        android:id="@+id/unSubscribe"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="18dp"
-        android:text="UnSubscribe"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintLeft_toRightOf="@+id/unSubscribeTopic"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subscribe" />
+        android:text="Time will show here"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPicker1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tvTimeResult2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Time will show here"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPicker2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/tvTimeResult3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Time will show here"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPicker3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
 
 </android.support.constraint.ConstraintLayout>
