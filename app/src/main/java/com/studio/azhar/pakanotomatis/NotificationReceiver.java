@@ -1,4 +1,4 @@
-package com.studio.azhar.pakanotomatis.notif;
+package com.studio.azhar.pakanotomatis;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

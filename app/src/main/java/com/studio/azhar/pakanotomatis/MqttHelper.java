@@ -1,6 +1,7 @@
 package com.studio.azhar.pakanotomatis;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -13,43 +14,54 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+
 public class MqttHelper {
 
+    //SharedPreferences sharedpreferences;
+  //  public static final String myprefIP = "myip";
+    public static final String Ip = "nameKey";
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverURI = "tcp://m10.cloudmqtt.com:10611";
-
-    final String clientId = "android";
-    final String subscriptionTopic = "IOT/PAKAN/OTOMATIS";
+  public static final String clientId = "android";
+    final String subcriptionTopic = "IOT/PAKAN/STATUS";
 
     final String username = "hbsqnuqo";
     final String password = "XqKZn1s52FiK";
 
     public MqttHelper(final Context context){
 
-       mqttAndroidClient = new MqttAndroidClient(context, serverURI, clientId);
-       mqttAndroidClient.setCallback(new MqttCallbackExtended() {
-           @Override
-           public void connectComplete(boolean reconnect, String serverURI) {
 
-           }
+//        sharedpreferences = context.getSharedPreferences(myprefIP, Context.MODE_PRIVATE);
+//        String ip = sharedpreferences.getString(Ip,"");
+//        //String ipHis= "tcp://"+ip+":1883";//ganti 1883
+        String ipHis = "tcp://m10.cloudmqtt.com:10611";
 
-           @Override
-           public void connectionLost(Throwable cause) {
+        mqttAndroidClient = new MqttAndroidClient(context, ipHis, clientId);
+        mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean b, String s) {
+                Log.w("mqtt", s);
+            }
 
-           }
+            @Override
+            public void connectionLost(Throwable cause) {
 
-           @Override
-           public void messageArrived(String topic, MqttMessage message) throws Exception {
+            }
 
-           }
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.w("Mqtt",message.toString() );
+            }
 
-           @Override
-           public void deliveryComplete(IMqttDeliveryToken token) {
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
 
-           }
-       });
+            }
+        });
+        connect();
+
     }
+
 
     public void setCallback(MqttCallbackExtended callback){
         mqttAndroidClient.setCallback(callback);
@@ -62,7 +74,7 @@ public class MqttHelper {
         mqttConnectOptions.setUserName(username);
         mqttConnectOptions.setPassword(password.toCharArray());
 
-        try{
+        try {
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
@@ -72,12 +84,12 @@ public class MqttHelper {
                     disconnectedBufferOptions.setBufferSize(100);
                     disconnectedBufferOptions.setPersistBuffer(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeToTopic();
+                    subcribeToTopic();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.d("MQTT", "failed to connect to server");
+                    Log.w("Mqtt", "Failed to connect to: " + Ip + exception.toString());
                 }
             });
         }catch (MqttException ex){
@@ -85,21 +97,21 @@ public class MqttHelper {
         }
     }
 
-    private void subscribeToTopic(){
-        try{
-            mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
+    private void subcribeToTopic(){
+        try {
+            mqttAndroidClient.subscribe(subcriptionTopic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("mqtt", "subscribed");
+                    Log.w("Mqtt","Subcribed!");
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("mqtt", "subscribe failed");
+                    Log.w("Mqtt", "Subcribed fail" + exception);
                 }
             });
         }catch (MqttException ex){
-            System.err.println("Exception whilst subscibing");
+            System.err.println("Exception whilst subcribing");
             ex.printStackTrace();
         }
     }

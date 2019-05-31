@@ -1,4 +1,4 @@
-package com.studio.azhar.pakanotomatis.notif;
+package com.studio.azhar.pakanotomatis;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -21,8 +21,6 @@ public class PahoMqttClient {
 
     final String username = "hbsqnuqo";
     final String password = "XqKZn1s52FiK";
-
-    final String subcriptionTopic = "IOT/PAKAN/STATUS";
 
     public MqttAndroidClient getMqttClient(Context context, String brokerUrl, String clientId) {
 
@@ -78,9 +76,6 @@ public class PahoMqttClient {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setCleanSession(false);
         mqttConnectOptions.setAutomaticReconnect(true);
-        //mqttConnectOptions.setWill(Constants.PUBLISH_TOPIC, "I am going offline".getBytes(), 1, true);
-        //mqttConnectOptions.setUserName("ngbllzzy");
-        //mqttConnectOptions.setPassword("WtjhZKl3OPoK".toCharArray());
         mqttConnectOptions.setUserName(username);
         mqttConnectOptions.setPassword(password.toCharArray());
         return mqttConnectOptions;
@@ -93,7 +88,7 @@ public class PahoMqttClient {
         encodedPayload = msg.getBytes("UTF-8");
         MqttMessage message = new MqttMessage(encodedPayload);
         message.setId(320);
-        message.setRetained(true);
+        message.setRetained(false);
         message.setQos(qos);
         client.publish(topic, message);
     }
@@ -131,22 +126,4 @@ public class PahoMqttClient {
         });
     }
 
-    private void subcribeToTopic(){
-        try {
-            mqttAndroidClient.subscribe(subcriptionTopic, 0, null, new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subcribed!");
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt", "Subcribed fail" + exception);
-                }
-            });
-        }catch (MqttException ex){
-            System.err.println("Exception whilst subcribing");
-            ex.printStackTrace();
-        }
-    }
 }

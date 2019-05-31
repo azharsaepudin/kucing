@@ -23,13 +23,9 @@
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
-        <service
-            android:name=".notif.MqttMessageService"
-            android:enabled="true"
-            android:exported="true" />
 
         <receiver
-            android:name=".notif.NotificationReceiver"
+            android:name=".NotificationReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
     </application>
