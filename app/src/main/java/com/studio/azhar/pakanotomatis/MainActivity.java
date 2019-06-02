@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
 
-                tvTimeResult1.setText(hourOfDay+":"+minutes);
+                tvTimeResult1.setText(String.format("%02d:%02d", hourOfDay, minutes));
 
             }
         },
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
 
-                tvTimeResult2.setText(hourOfDay+":"+minutes);
+                tvTimeResult2.setText(String.format("%02d:%02d", hourOfDay, minutes));
 
             }
         },
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
 
-                tvTimeResult3.setText(hourOfDay + ":" + minutes);
+                tvTimeResult3.setText(String.format("%02d:%02d", hourOfDay, minutes));
 
             }
         },
