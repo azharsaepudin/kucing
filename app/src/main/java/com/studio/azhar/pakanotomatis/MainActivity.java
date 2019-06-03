@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Button btnPublish,btnPicker1, btnPicker2, btnPicker3;
+    private Button btnUpload1, btnUpload2, btnUpload3;
 
     MediaPlayer mMediaPlayer;
 
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         btnPicker1 = findViewById(R.id.btnPicker1);
         btnPicker2 = findViewById(R.id.btnPicker2);
         btnPicker3 = findViewById(R.id.btnPicker3);
+
+        btnUpload1 = findViewById(R.id.btnUpload1);
+        btnUpload2 = findViewById(R.id.btnUpload2);
+        btnUpload3 = findViewById(R.id.btnUpload3);
 
 
         tvTimeResult1 = findViewById(R.id.tvTimeResult1);
@@ -97,6 +102,67 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showTimeDialog3();
+            }
+        });
+
+        btnUpload1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String settingTime1 = tvTimeResult1.getText().toString().trim();
+                String mSetTime1 = ("1."+settingTime1+":"+"00");
+
+                if (!mSetTime1.isEmpty()) {
+                    try {
+
+                        pahoMqttClient.publishMessage(client, mSetTime1, 0, Constants.PUBLISH_TOPIC);
+
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        btnUpload2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String settingTime2 = tvTimeResult2.getText().toString().trim();
+                String mSetTime2 = ("2."+settingTime2+":"+"00");
+
+                if (!mSetTime2.isEmpty()) {
+                    try {
+
+                        pahoMqttClient.publishMessage(client, mSetTime2, 0, Constants.PUBLISH_TOPIC);
+
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        btnUpload3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String settingTime3 = tvTimeResult3.getText().toString().trim();
+                String mSetTime3 = ("3."+settingTime3+":"+"00");
+
+                if (!mSetTime3.isEmpty()) {
+                    try {
+
+                        pahoMqttClient.publishMessage(client, mSetTime3, 0, Constants.PUBLISH_TOPIC);
+
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
