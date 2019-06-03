@@ -22,8 +22,10 @@ public class MqttHelper {
     public static final String Ip = "nameKey";
     public MqttAndroidClient mqttAndroidClient;
 
-  public static final String clientId = "android";
-    final String subcriptionTopic = "IOT/PAKAN/STATUS";
+    public static final String clientId = "android";
+    final String subcriptionTopic = "IOT/PAKAN/STATUS"; //only for information pakan
+    final String subcriptionTopic2 = "IOT/SETTING/STATUS";//only for information setting successs
+    final String subcriptionTopic3 = "IOT/DOING/STATUS";//only for DOING ACTION machine1, 2, 3 successs
 
     final String username = "hbsqnuqo";
     final String password = "XqKZn1s52FiK";
@@ -85,6 +87,8 @@ public class MqttHelper {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
                     subcribeToTopic();
+                    subcribeToTopic2();
+                    subcribeToTopic3();
                 }
 
                 @Override
@@ -102,12 +106,51 @@ public class MqttHelper {
             mqttAndroidClient.subscribe(subcriptionTopic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subcribed!");
+                    Log.w("Mqtt","Subcribed topic1!");
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.w("Mqtt", "Subcribed fail" + exception);
+                }
+            });
+        }catch (MqttException ex){
+            System.err.println("Exception whilst subcribing");
+            ex.printStackTrace();
+        }
+    }
+
+    private void subcribeToTopic2(){
+        try {
+
+            mqttAndroidClient.subscribe(subcriptionTopic2, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.d("Mqtt", "Subcribed topic2");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+
+                }
+            });
+        }catch (MqttException ex){
+            System.err.println("Exception whilst subcribing");
+            ex.printStackTrace();
+        }
+    }
+
+    private void subcribeToTopic3(){
+        try{
+            mqttAndroidClient.subscribe(subcriptionTopic3, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.d("Mqtt", "Subcribed topic3");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+
                 }
             });
         }catch (MqttException ex){
