@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String settingTime1 = tvTimeResult1.getText().toString().trim();
-                String mSetTime1 = ("1."+settingTime1+":"+"00");
+                String mSetTime1 = ("1."+settingTime1+"");
 
                 if (!mSetTime1.isEmpty()) {
                     try {
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String settingTime2 = tvTimeResult2.getText().toString().trim();
-                String mSetTime2 = ("2."+settingTime2+":"+"00");
+                String mSetTime2 = ("2."+settingTime2+"");
 
                 if (!mSetTime2.isEmpty()) {
                     try {
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String settingTime3 = tvTimeResult3.getText().toString().trim();
-                String mSetTime3 = ("3."+settingTime3+":"+"00");
+                String mSetTime3 = ("3."+settingTime3+"");
 
                 if (!mSetTime3.isEmpty()) {
                     try {
@@ -241,9 +241,9 @@ public class MainActivity extends AppCompatActivity {
         String settingTime2 = tvTimeResult2.getText().toString().trim();
         String settingTime3 = tvTimeResult3.getText().toString().trim();
 
-        String mSetTime1 = ("1."+settingTime1+":"+"00");
-        String mSetTime2 = ("2."+settingTime2+":"+"00");
-        String mSetTime3 = ("3."+settingTime3+":"+"00");
+        String mSetTime1 = ("1."+settingTime1+"");
+        String mSetTime2 = ("2."+settingTime2+"");
+        String mSetTime3 = ("3."+settingTime3+"");
 
        // Log.d("SETIME", mSetTime);
 
