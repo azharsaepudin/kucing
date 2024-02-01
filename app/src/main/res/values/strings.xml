@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PakanOtomatis</string>
+
+    <string-array name="list_item">
+        <item>d</item>
+        <item>m</item>
+        <item>j</item>
+    </string-array>
 </resources>

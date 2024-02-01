@@ -19,8 +19,8 @@ public class PahoMqttClient {
     private static final String TAG = "PahoMqttClient";
     private MqttAndroidClient mqttAndroidClient;
 
-    final String username = "hbsqnuqo";
-    final String password = "XqKZn1s52FiK";
+//    final String username = "hbsqnuqo";//username MQTT
+//    final String password = "XqKZn1s52FiK";//password MQTT
 
     public MqttAndroidClient getMqttClient(Context context, String brokerUrl, String clientId) {
 
@@ -46,6 +46,7 @@ public class PahoMqttClient {
         return mqttAndroidClient;
     }
 
+    //disconnet mqtt jika ingin digunakan tinggal panggil
     public void disconnect(@NonNull MqttAndroidClient client) throws MqttException {
         IMqttToken mqttToken = client.disconnect();
         mqttToken.setActionCallback(new IMqttActionListener() {
@@ -61,6 +62,7 @@ public class PahoMqttClient {
         });
     }
 
+    //koneksi ke MQTT
     @NonNull
     private DisconnectedBufferOptions getDisconnectedBufferOptions() {
         DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
@@ -71,17 +73,18 @@ public class PahoMqttClient {
         return disconnectedBufferOptions;
     }
 
+    //koneksi ke MQTT
     @NonNull
     private MqttConnectOptions getMqttConnectionOption() {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setCleanSession(false);
         mqttConnectOptions.setAutomaticReconnect(true);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+//        mqttConnectOptions.setUserName(username);
+//        mqttConnectOptions.setPassword(password.toCharArray());
         return mqttConnectOptions;
     }
 
-
+    //berfungsi untuk mempublish pesan ke MQTT
     public void publishMessage(@NonNull MqttAndroidClient client, @NonNull String msg, int qos, @NonNull String topic)
             throws MqttException, UnsupportedEncodingException {
         byte[] encodedPayload = new byte[0];
@@ -93,6 +96,7 @@ public class PahoMqttClient {
         client.publish(topic, message);
     }
 
+    //fungsi subscribe jika ingin menggunakan kelas ini, berarti subcribe nya memamnggil fungsi dibawah ini
     public void subscribe(@NonNull MqttAndroidClient client, @NonNull final String topic, int qos) throws MqttException {
         IMqttToken token = client.subscribe(topic, qos);
         token.setActionCallback(new IMqttActionListener() {
@@ -109,6 +113,7 @@ public class PahoMqttClient {
         });
     }
 
+    //fungsu unsubcribe juka ingin digunakan tinggal memanggil
     public void unSubscribe(@NonNull MqttAndroidClient client, @NonNull final String topic) throws MqttException {
 
         IMqttToken token = client.unsubscribe(topic);

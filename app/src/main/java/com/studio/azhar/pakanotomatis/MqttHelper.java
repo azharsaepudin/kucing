@@ -22,22 +22,27 @@ public class MqttHelper {
     public static final String Ip = "nameKey";
     public MqttAndroidClient mqttAndroidClient;
 
+
+    // empat baris ini adalah topik2 MQTT yg dikirmkan ke server
     public static final String clientId = "android";
     final String subcriptionTopic = "IOT/PAKAN/STATUS"; //only for information pakan
     final String subcriptionTopic2 = "IOT/SETTING/STATUS";//only for information setting successs
     final String subcriptionTopic3 = "IOT/DOING/STATUS";//only for DOING ACTION machine1, 2, 3 successs
 
-    final String username = "hbsqnuqo";
-    final String password = "XqKZn1s52FiK";
+    final String username = "hbsqnuqo";//ini username server untuk konek ke MQTT broker
+    final String password = "XqKZn1s52FiK";//ini password server untuk konek ke MQTT broker
 
     public MqttHelper(final Context context){
 
 
-//        sharedpreferences = context.getSharedPreferences(myprefIP, Context.MODE_PRIVATE);
-//        String ip = sharedpreferences.getString(Ip,"");
-//        //String ipHis= "tcp://"+ip+":1883";//ganti 1883
-        String ipHis = "tcp://m10.cloudmqtt.com:10611";
+       // String ipHis = "tcp://m10.cloudmqtt.com:10611";//ini adalah URL mqtt
 
+        String ipHis = "tcp://broker.hivemq.com:1883";//ini adalah URL mqtt
+
+       // String ipHis = "tcp://192.168.1.4";//ini adalah URL mqtt
+
+
+        //dibawah ini merupakan fungsi untuk mengambil pesan dari MQTT
         mqttAndroidClient = new MqttAndroidClient(context, ipHis, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -60,7 +65,7 @@ public class MqttHelper {
 
             }
         });
-        connect();
+        connect();//memanggil koneksi ke MQTT
 
     }
 
@@ -70,11 +75,12 @@ public class MqttHelper {
     }
 
     private void connect(){
+        //dibawah ini merupakan fungsi - fungsi untuk mengkoneksikan ke MQTT server
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+//        mqttConnectOptions.setUserName(username);
+//        mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
@@ -86,9 +92,9 @@ public class MqttHelper {
                     disconnectedBufferOptions.setBufferSize(100);
                     disconnectedBufferOptions.setPersistBuffer(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subcribeToTopic();
-                    subcribeToTopic2();
-                    subcribeToTopic3();
+                    subcribeToTopic();//fungsi untuk memanggil topic ke 1
+                    subcribeToTopic2();//fungsi untuk memanggil topic ke 2
+                    subcribeToTopic3();//fungsi untuk memanggil topic ke 3
                 }
 
                 @Override
@@ -101,6 +107,7 @@ public class MqttHelper {
         }
     }
 
+    //ini subcribe topic ke 1
     private void subcribeToTopic(){
         try {
             mqttAndroidClient.subscribe(subcriptionTopic, 0, null, new IMqttActionListener() {
@@ -120,6 +127,7 @@ public class MqttHelper {
         }
     }
 
+    //ini subcribe topic ke 2
     private void subcribeToTopic2(){
         try {
 
@@ -140,6 +148,7 @@ public class MqttHelper {
         }
     }
 
+    //ini subcribe topic ke 3
     private void subcribeToTopic3(){
         try{
             mqttAndroidClient.subscribe(subcriptionTopic3, 0, null, new IMqttActionListener() {

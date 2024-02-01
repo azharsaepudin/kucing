@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.studio.azhar.pakanotomatis">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />//ini ijin untuk konek ke internet
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> //ijin untuk membangunkan sistem ketika sistem sleep atau idle
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> //ijin untuk network state seperti wifi
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> //mengetahui state phone
 
     <application
         android:allowBackup="true"
@@ -27,7 +27,7 @@
         <receiver
             android:name=".NotificationReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true"></receiver>//service untuk meminta ijin memunculkan notifikasi
     </application>
 
 </manifest>
